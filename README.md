@@ -12,6 +12,26 @@ We start from **Qwen2.5-0.5B-Instruct** (a 500M-parameter chat model). It
 already speaks English and knows JSON, but it doesn't know *our* categories
 or rules. Fine-tuning teaches it our task from 1,000 examples.
 
+## Results
+
+Scores on the 100 test tickets (never seen during training), with the
+settings in `lora_config.yaml` (400 steps, about 0.6% of weights trained):
+
+| Metric | Base model | Fine-tuned (LoRA) |
+|---|---|---|
+| Valid JSON | 100% | 100% |
+| category | 43% | **100%** |
+| urgency | 38% | **100%** |
+| product | 89% | **100%** |
+| order_id | 95% | **100%** |
+| customer_name | 87% | **100%** |
+| **All fields correct** | **13%** | **100%** |
+
+**Caveat:** the test tickets come from the same templates as the training
+tickets, so this task is easy for the fine-tuned model. On real, messy
+customer emails the score would be lower. Measuring on real data is the
+next step (Project 2).
+
 ---
 
 ## The 5 ideas you need first
